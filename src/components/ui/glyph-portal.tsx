@@ -303,8 +303,8 @@ export default function GlyphPortal({
       art.setAttribute("viewBox", `0 0 ${W} ${H}`);
       if (fontDirty) { ready = readInk(); fontDirty = false; }
       if (!ready) return;
-      const wordHeight = hasFront && H < 480 ? Math.min(H * .38, Math.max(24, H - 264)) : H * .38;
-      const widthFactor = isMobile ? 0.88 : 0.84;
+      const wordHeight = hasFront && H < 480 ? Math.min(H * .40, Math.max(24, H - 264)) : H * .40;
+      const widthFactor = isMobile ? 0.90 : 0.86;
       startScale = Math.min(W * widthFactor / bounds.width, wordHeight / bounds.height);
       select(target);
       const wordCenterY = isMobile ? H * 0.40 : H * 0.46;

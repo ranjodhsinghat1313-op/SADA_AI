@@ -54,7 +54,7 @@ export function TrustStrip() {
           <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             Enterprise Voice Infrastructure
           </h3>
-          <p className="text-xs sm:text-base font-normal text-slate-600 dark:text-slate-400 mt-2 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base font-normal text-slate-600 dark:text-slate-400 mt-2 max-w-2xl mx-auto">
             Bank-grade reliability built for high-volume clinics and service businesses across Australia & New Zealand
           </p>
         </motion.div>
@@ -75,8 +75,8 @@ export function TrustStrip() {
                 <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#14213D] border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:border-blue-500/60 group-hover:text-white group-hover:bg-blue-600 transition-all shadow-sm sm:shadow-md dark:shadow-black/30">
                   <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-tight">{item.title}</h4>
-                <p className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 leading-snug sm:leading-relaxed max-w-[170px]">{item.desc}</p>
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight">{item.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-snug sm:leading-relaxed max-w-[190px]">{item.desc}</p>
               </motion.div>
             );
           })}

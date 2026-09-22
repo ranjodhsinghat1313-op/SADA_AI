@@ -74,9 +74,15 @@
   html {
     scroll-behavior: smooth;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-size: 17px;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     overflow-x: clip;
+  }
+  @media (max-width: 640px) {
+    html {
+      font-size: 16.5px;
+    }
   }
   body {
     @apply bg-background text-foreground transition-colors duration-300;
