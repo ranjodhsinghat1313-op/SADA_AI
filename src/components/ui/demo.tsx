@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import GlyphPortal from "@/components/ui/glyph-portal";
 
 const settings = { word: "SADA AI", scrollLength: 2.6, interactive: true, annotations: false };
-const family = '"Plus Jakarta Sans", "Inter", "Arial Black", Arial, sans-serif';
-let fontLoad: Promise<void> | undefined;
+const family = '"Plus Jakarta Sans", "Outfit", "Arial Black", "Inter", Arial, sans-serif';
 
 export interface DemoProps extends Partial<typeof settings> {
   onBookDemo?: () => void;
@@ -20,7 +19,7 @@ export default function Demo({
   onExploreCalculator, 
   mode = "page", 
   onProgress, 
-  isDark = false,
+  isDark = false, 
   ...props 
 }: DemoProps) {
   const s = { ...settings, ...props };
@@ -36,22 +35,11 @@ export default function Demo({
     };
 
     if (typeof window !== "undefined" && "fonts" in document) {
-      fontLoad ??= new FontFace(
-        "Glyph Portal Jakarta",
-        'url("https://cdn.21st.dev/assets/mirror/15/153fc85b70298beeb1d61a5f723331649e7f23bb77302a66e61cb3e2fbdb5e79.woff2")',
-        { weight: "400 700 900" }
-      )
-        .load()
-        .then((font) => {
-          document.fonts.add(font);
-        })
-        .catch(() => {});
+      document.fonts.load('900 100px "Plus Jakarta Sans"')
+        .then(() => finish(family))
+        .catch(() => finish(family));
 
-      const timeout = window.setTimeout(() => finish(family), 800);
-      void fontLoad?.then(
-        () => finish('"Glyph Portal Jakarta", ' + family),
-        () => finish(family)
-      );
+      const timeout = window.setTimeout(() => finish(family), 350);
       return () => {
         settled = true;
         clearTimeout(timeout);
@@ -152,7 +140,7 @@ export default function Demo({
           scrollLength={s.scrollLength}
           interactive={s.interactive}
           annotations={s.annotations}
-          enterLabel="Enter SADA AI"
+          enterLabel="Explore More"
           onProgress={onProgress}
           front={
             <>

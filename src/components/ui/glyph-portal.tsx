@@ -110,7 +110,7 @@ function scrollParent(element: HTMLElement): HTMLElement | null {
 export default function GlyphPortal({
   word = "SADA AI", focusChar, interactive = true, background, front, children, scrollLength = 2.4,
   fontFamily = DEFAULT_FONT, fontWeight = 900, annotations = false,
-  enterLabel = "Enter SADA AI", className, style, onProgress,
+  enterLabel = "Explore More", className, style, onProgress,
 }: GlyphPortalProps) {
   const uid = `gp-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const clipId = `${uid}-clip`;
@@ -303,8 +303,8 @@ export default function GlyphPortal({
       art.setAttribute("viewBox", `0 0 ${W} ${H}`);
       if (fontDirty) { ready = readInk(); fontDirty = false; }
       if (!ready) return;
-      const wordHeight = hasFront && H < 480 ? Math.min(H * .40, Math.max(24, H - 264)) : H * .40;
-      const widthFactor = isMobile ? 0.90 : 0.86;
+      const wordHeight = hasFront && H < 480 ? Math.min(H * .34, Math.max(24, H - 264)) : (isMobile ? H * 0.32 : H * 0.35);
+      const widthFactor = isMobile ? 0.86 : 0.78;
       startScale = Math.min(W * widthFactor / bounds.width, wordHeight / bounds.height);
       select(target);
       const wordCenterY = isMobile ? H * 0.40 : H * 0.46;
@@ -323,6 +323,12 @@ export default function GlyphPortal({
       section.style.setProperty("--gp-word-bottom", `${wordCenterY + bounds.height * startScale / 2}px`);
       section.dataset.gpReady = "true";
       section.dataset.gpMotion = !motion.matches && target ? "on" : "off";
+
+      if (field) {
+        field.style.clipPath = "none";
+        void field.offsetHeight;
+        field.style.clipPath = `url(#${clipId})`;
+      }
     };
 
     const frame = (time?: number) => {
@@ -604,7 +610,7 @@ export default function GlyphPortal({
             data-gp-enter
             href={`#${uid}-content`}
             className="pearl-btn group"
-            aria-label={typeof enterLabel === "string" ? enterLabel : "Enter SADA AI"}
+            aria-label={typeof enterLabel === "string" ? enterLabel : "Explore More"}
           >
             <div className="pearl-wrap">
               <p>

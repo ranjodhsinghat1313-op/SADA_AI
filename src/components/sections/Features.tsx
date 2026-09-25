@@ -7,8 +7,6 @@ import {
   Clock4, 
   ShieldCheck, 
   Sparkles,
-  CheckCircle2,
-  ArrowRight
 } from "lucide-react";
 import { motion } from "motion/react";
 
@@ -69,7 +67,7 @@ export function Features({ onBookDemo }: FeaturesProps) {
   ];
 
   return (
-    <section id="features" className="py-24 sm:py-28 md:py-36 bg-white dark:bg-[#0A1128] text-slate-900 dark:text-slate-100 border-t border-slate-200/90 dark:border-slate-800 relative transition-colors duration-300">
+    <section id="features" className="py-24 sm:py-28 md:py-36 bg-white/75 dark:bg-[#0A1128]/80 backdrop-blur-md text-slate-900 dark:text-slate-100 border-t border-slate-200/80 dark:border-slate-800 relative transition-colors duration-300">
       {/* Background ambient glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -92,55 +90,35 @@ export function Features({ onBookDemo }: FeaturesProps) {
         </motion.div>
 
         {/* Feature Cards Grid (4 core boards on mobile, all 6 on desktop) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feat, idx) => {
-            const Icon = feat.icon;
-            const isDesktopOnly = idx === 2 || idx === 5; // Exclude analytics & strict compliance on mobile
+            const isDesktopOnly = idx === 2 || idx === 5;
             return (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, scale: 0.88, y: 30 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 240, 
-                  damping: 18, 
-                  delay: idx * 0.05,
-                  mass: 0.8
-                }}
-                whileHover={{ y: -6, scale: 1.015, transition: { duration: 0.25 } }}
-                className={`rounded-3xl bg-white dark:bg-[#14213D] p-5 sm:p-8 border border-slate-200/90 dark:border-slate-800 shadow-md dark:shadow-xl hover:shadow-2xl hover:border-blue-500/60 transition-all duration-300 flex-col justify-between group cursor-default ${
+                transition={{ duration: 0.5, delay: idx * 0.05, ease: "easeOut" }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className={`rounded-[28px] sm:rounded-[32px] bg-[#F1F4F9] dark:bg-[#111C35] p-8 sm:p-10 border border-slate-200/60 dark:border-slate-800/80 transition-all duration-300 flex-col justify-start group cursor-default ${
                   isDesktopOnly ? "hidden md:flex" : "flex"
                 }`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4 sm:mb-5">
-                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-md shadow-blue-600/25 shrink-0">
-                      <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-semibold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-blue-200 dark:border-blue-800/60">
-                      {feat.tag}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight mb-2 sm:mb-2.5">
-                    {feat.title}
-                  </h3>
-                  
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 sm:mb-6">
-                    {feat.description}
-                  </p>
+                {/* Top Pill Badge (Pure Text) */}
+                <div className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-[#182647] border border-slate-200/80 dark:border-slate-700/60 text-slate-800 dark:text-slate-200 text-xs font-medium w-fit mb-6 shadow-xs">
+                  {feat.tag}
                 </div>
 
-                <div className="pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
-                  {feat.benefits.map((benefit, bIdx) => (
-                    <div key={bIdx} className="flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-300">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
-                      <span>{benefit}</span>
-                    </div>
-                  ))}
-                </div>
+                {/* Heading */}
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white mb-3">
+                  {feat.title}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-sm sm:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                  {feat.description}
+                </p>
               </motion.div>
             );
           })}

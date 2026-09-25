@@ -44,6 +44,48 @@ export default function App() {
     }
   }, [isDark]);
 
+  // Always restart website from the front page on reload / Ctrl+R
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      if (window.location.hash) {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
+
+      window.scrollTo(0, 0);
+
+      const rAF = requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+      });
+      const timer = setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 50);
+
+      const handleBeforeUnload = () => {
+        window.scrollTo(0, 0);
+      };
+
+      const handlePageShow = (event: PageTransitionEvent) => {
+        if (event.persisted) {
+          window.scrollTo(0, 0);
+        }
+      };
+
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      window.addEventListener("pageshow", handlePageShow);
+
+      return () => {
+        cancelAnimationFrame(rAF);
+        clearTimeout(timer);
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+        window.removeEventListener("pageshow", handlePageShow);
+      };
+    }
+  }, []);
+
   const updateNavVisibility = useCallback((visible: boolean) => {
     if (navVisibleRef.current !== visible) {
       navVisibleRef.current = visible;

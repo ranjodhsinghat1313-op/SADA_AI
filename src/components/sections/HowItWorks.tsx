@@ -53,7 +53,7 @@ export function HowItWorks({ onBookDemo }: HowItWorksProps) {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 sm:py-28 md:py-36 bg-[#F8FAFC]/90 dark:bg-[#070E22] text-slate-900 dark:text-slate-100 relative overflow-hidden border-t border-slate-200/90 dark:border-slate-800 transition-colors duration-300">
+    <section id="how-it-works" className="py-24 sm:py-28 md:py-36 bg-[#F8FAFC]/75 dark:bg-[#070E22]/80 backdrop-blur-md text-slate-900 dark:text-slate-100 relative overflow-hidden border-t border-slate-200/80 dark:border-slate-800 transition-colors duration-300">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none -z-0" />
 
@@ -78,58 +78,33 @@ export function HowItWorks({ onBookDemo }: HowItWorksProps) {
         {/* 3 Step Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 relative">
           
-          {/* Connecting line on desktop */}
-          <div className="hidden md:block absolute top-1/3 left-[20%] right-[20%] h-[2px] bg-gradient-to-r from-blue-300 via-blue-600 to-blue-300 dark:from-blue-900 dark:via-blue-600 dark:to-blue-900 -z-0" />
-
           {steps.map((s, idx) => {
-            const Icon = s.icon;
             return (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, scale: 0.88, y: 30 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 240, 
-                  damping: 18, 
-                  delay: idx * 0.06,
-                  mass: 0.8
-                }}
-                whileHover={{ y: -6, scale: 1.015, transition: { duration: 0.25 } }}
-                className="relative rounded-2xl sm:rounded-3xl bg-white dark:bg-[#14213D] backdrop-blur-md p-5 sm:p-8 border border-slate-200/90 dark:border-slate-800 flex flex-col justify-between hover:border-blue-500/60 transition-all duration-300 z-10 group shadow-md dark:shadow-xl cursor-default"
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.5, delay: idx * 0.06, ease: "easeOut" }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="relative rounded-[28px] sm:rounded-[32px] bg-[#F1F4F9] dark:bg-[#111C35] p-8 sm:p-10 border border-slate-200/60 dark:border-slate-800/80 flex flex-col justify-start transition-all duration-300 z-10 group cursor-default"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4 sm:mb-6">
-                    <div className="h-11 w-11 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800/80 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md shrink-0">
-                      <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
-                    </div>
-                    <span className="font-mono text-2xl sm:text-3xl font-extrabold text-blue-200 dark:text-blue-500/30 group-hover:text-blue-600 dark:group-hover:text-blue-400/80 transition-colors">
-                      {s.step}
-                    </span>
-                  </div>
-
-                  <span className="text-[11px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider block mb-1">
-                    {s.subtitle}
-                  </span>
-
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-2 sm:mb-3">
-                    {s.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 sm:mb-6">
-                    {s.description}
-                  </p>
+                {/* Top Pill Badge */}
+                <div className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-[#182647] border border-slate-200/80 dark:border-slate-700/60 text-slate-800 dark:text-slate-200 text-xs font-medium w-fit mb-6 shadow-xs">
+                  <span className="font-mono text-blue-600 dark:text-blue-400 font-bold">{s.step}</span>
+                  <span className="text-slate-300 dark:text-slate-600 mx-1.5">·</span>
+                  <span>{s.subtitle}</span>
                 </div>
 
-                <div className="pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
-                  {s.details.map((detail, dIdx) => (
-                    <div key={dIdx} className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
-                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
-                      <span>{detail}</span>
-                    </div>
-                  ))}
-                </div>
+                {/* Heading */}
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3">
+                  {s.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm sm:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                  {s.description}
+                </p>
               </motion.div>
             );
           })}

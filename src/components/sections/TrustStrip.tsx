@@ -39,7 +39,7 @@ export function TrustStrip() {
   ];
 
   return (
-    <div className="border-b border-slate-200 dark:border-slate-800/90 bg-slate-100/70 dark:bg-[#070E22] text-slate-900 dark:text-slate-100 py-16 sm:py-24 md:py-28 relative overflow-hidden transition-colors duration-300">
+    <div className="border-b border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-[#070E22]/60 backdrop-blur-md text-slate-900 dark:text-slate-100 py-16 sm:py-24 md:py-28 relative overflow-hidden transition-colors duration-300">
       {/* Subtle blue ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[250px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -59,24 +59,27 @@ export function TrustStrip() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {items.map((item, idx) => {
-            const Icon = item.icon;
             return (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ type: "spring", stiffness: 260, damping: 20, delay: idx * 0.04 }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="flex flex-col items-center text-center space-y-1.5 sm:space-y-2.5 group cursor-default p-2 rounded-xl"
+                transition={{ duration: 0.45, delay: idx * 0.04, ease: "easeOut" }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="rounded-[24px] sm:rounded-[28px] bg-white dark:bg-[#111C35] p-6 sm:p-7 border border-slate-200/70 dark:border-slate-800/80 transition-all flex flex-col justify-start group cursor-default"
               >
-                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#14213D] border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:border-blue-500/60 group-hover:text-white group-hover:bg-blue-600 transition-all shadow-sm sm:shadow-md dark:shadow-black/30">
-                  <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                <div className="px-3 py-1 rounded-md bg-slate-100 dark:bg-[#182647] border border-slate-200/80 dark:border-slate-700/60 text-slate-800 dark:text-slate-200 text-xs font-medium w-fit mb-4 shadow-xs">
+                  {idx === 0 ? "Coverage" : idx === 1 ? "Voices" : idx === 2 ? "Integration" : idx === 3 ? "Compliance" : idx === 4 ? "Latency" : "Pricing"}
                 </div>
-                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight">{item.title}</h4>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-snug sm:leading-relaxed max-w-[190px]">{item.desc}</p>
+                <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                  {item.desc}
+                </p>
               </motion.div>
             );
           })}

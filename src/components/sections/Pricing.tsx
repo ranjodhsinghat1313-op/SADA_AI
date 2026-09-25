@@ -1,169 +1,146 @@
-"use client";
-
 import React, { useState } from "react";
-import { Check, Sparkles, Shield, ArrowRight, Phone } from "lucide-react";
+import { Check, Sparkles, Shield, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "motion/react";
 
 interface PricingProps {
-  onSelectPlan: (planName: string) => void;
+  onSelectPlan: (plan: string) => void;
 }
 
 export function Pricing({ onSelectPlan }: PricingProps) {
-  const [selectedMobilePlan, setSelectedMobilePlan] = useState<number>(1); // Default to 'Growth' (Most Popular)
+  const [activeTab, setActiveTab] = useState<number>(1);
 
   const plans = [
     {
       name: "Starter",
-      badge: "Solo & Small Practices",
-      tagline: "Entry-level 24/7 AI phone receptionist to capture every missed call.",
-      price: "Tailored Quote",
-      priceSub: "Based on monthly call volume",
-      isPopular: false,
+      badge: "Sole Practitioners",
+      price: "$299",
+      priceSub: "AUD / month",
+      tagline: "Essential after-hours & overflow answering for solo practices.",
       features: [
-        "24/7/365 AI Inbound Answering",
-        "Direct Appointment Booking",
-        "Google Calendar & Outlook Sync",
-        "Automated SMS Confirmations",
-        "Full Call Audio Recordings",
-        "Instant Transcripts & Summaries",
-        "Standard AU/NZ Voices",
-        "Monthly Flexible Call Allowance",
+        "Up to 150 minutes of AI voice calls / mo",
+        "Australian & New Zealand trained voice",
+        "Direct Google Calendar & Outlook sync",
+        "Automated booking confirmation SMS",
+        "Real-time email summary of every call",
+        "Warm call forwarding to human mobile",
       ],
-      ctaText: "Get Starter Quote",
+      ctaText: "Start Starter Plan",
+      isPopular: false,
     },
     {
       name: "Growth",
       badge: "Most Popular",
-      tagline: "Comprehensive operational automation for busy surgeries, agencies & trades.",
-      price: "Tailored Quote",
-      priceSub: "Custom minutes & features",
-      isPopular: true,
+      price: "$599",
+      priceSub: "AUD / month",
+      tagline: "Full-time 24/7 receptionist for high-volume busy practices.",
       features: [
-        "Everything in Starter, plus:",
-        "Full CRM Integration (Cliniko, ServiceM8, HubSpot)",
-        "Advanced Clinical / Job Qualification Logic",
-        "Warm Live Transfers to Human Staff",
-        "Custom Voice Cadence & Branded Greetings",
-        "Real-Time Analytics & Sentiment Dashboard",
-        "Cancellation & Rescheduling Workflows",
-        "Priority Australian Phone & Email Support",
+        "Up to 500 minutes of AI voice calls / mo",
+        "All Australian & NZ voice accents",
+        "Cliniko, ServiceM8 & CRM bi-directional sync",
+        "Custom clinic protocols & fee schedules",
+        "Instant SMS cancellation & reschedule links",
+        "Priority live onboarding & voice tailoring",
+        "Dedicated VIP support channel",
       ],
-      ctaText: "Get Growth Quote",
+      ctaText: "Start Growth Plan",
+      isPopular: true,
     },
     {
       name: "Scale",
-      badge: "Multi-Site & Franchises",
-      tagline: "High-volume call handling across multi-location clinics and large teams.",
-      price: "Tailored Quote",
-      priceSub: "Enterprise volume discount",
-      isPopular: false,
+      badge: "Multi-Location Clinics",
+      price: "$1,199",
+      priceSub: "AUD / month",
+      tagline: "Multi-location clinics requiring custom CRM routing.",
       features: [
-        "Everything in Growth, plus:",
-        "Unlimited Inbound Call Capacity",
-        "Multiple Dedicated Phone Numbers",
-        "Multi-Location Practice Routing",
-        "Automated Outbound Appointment Reminders",
-        "Custom API & EHR / Webhook Integrations",
-        "Dedicated Account Manager",
-        "Custom SLA & HIPAA/Privacy Guarantees",
+        "Up to 1,500 minutes of AI voice calls / mo",
+        "Multi-location calendar & doctor routing",
+        "Custom EHR & CRM API integration",
+        "Custom voice persona & brand greeting",
+        "Multi-line simultaneous call overflow",
+        "Dedicated account manager",
+        "Quarterly ROI & operational review",
       ],
-      ctaText: "Get Scale Quote",
+      ctaText: "Contact for Scale",
+      isPopular: false,
     },
   ];
 
   return (
-    <section id="pricing" className="py-24 sm:py-28 md:py-36 bg-white dark:bg-[#0A1128] text-slate-900 dark:text-slate-100 border-t border-slate-200/90 dark:border-slate-800 relative transition-colors duration-300">
+    <section id="pricing" className="py-24 sm:py-28 md:py-36 bg-white/75 dark:bg-[#0A1128]/80 backdrop-blur-md text-slate-900 dark:text-slate-100 border-t border-slate-200/80 dark:border-slate-800 relative transition-colors duration-300">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header */}
+        {/* Section Header */}
         <motion.div 
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.9, y: 25 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
+          transition={{ type: "spring", stiffness: 220, damping: 20 }}
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider mb-4">
-            <span>Flexible Practice Pricing</span>
-          </div>
-
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-sans">
-            Tailored plans designed around your call volume.
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight font-sans">
+            Transparent pricing for growing practices.
           </h2>
-          <p className="mt-3.5 sm:mt-4 text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            No expensive setup fees, no restrictive lock-in contracts. You only pay for what your business actually uses, with complete flexibility to scale up or down.
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            One extra booking captured per month pays for the entire service. Month-to-month flexibility with zero hidden fees.
           </p>
         </motion.div>
 
-        {/* Mobile Interactive Plan Switcher Tabs (Visible on mobile only) */}
-        <div className="lg:hidden mb-6 max-w-sm mx-auto">
-          <div className="flex items-center p-1 rounded-2xl bg-slate-200/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700/80 shadow-inner">
-            {plans.map((p, idx) => {
-              const isSelected = selectedMobilePlan === idx;
-              return (
-                <button
-                  key={p.name}
-                  onClick={() => setSelectedMobilePlan(idx)}
-                  className={`relative flex-1 py-2 px-2 text-xs font-bold rounded-xl transition-all duration-200 text-center cursor-pointer ${
-                    isSelected
-                      ? "text-white shadow-md shadow-blue-600/30"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                  }`}
-                >
-                  {isSelected && (
-                    <motion.div
-                      layoutId="activeMobilePlanHighlight"
-                      className="absolute inset-0 bg-blue-600 rounded-xl"
-                      transition={{ type: "spring", stiffness: 350, damping: 28 }}
-                    />
-                  )}
-                  <span className="relative z-10 flex items-center justify-center gap-1 font-semibold">
-                    <span>{p.name}</span>
-                    {p.isPopular && (
-                      <span className={`text-[9px] px-1 rounded font-extrabold ${isSelected ? "bg-blue-800/80 text-blue-100" : "bg-blue-600 text-white"}`}>
-                        ★
-                      </span>
-                    )}
-                  </span>
-                </button>
-              );
-            })}
+        {/* Mobile Tab Switcher */}
+        <div className="lg:hidden flex justify-center mb-6">
+          <div className="inline-flex p-1 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80">
+            {plans.map((p, idx) => (
+              <button
+                key={p.name}
+                onClick={() => setActiveTab(idx)}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                  activeTab === idx
+                    ? "bg-white dark:bg-blue-600 text-slate-900 dark:text-white shadow-sm"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                {p.name}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Mobile Single Active Card Display (Interactive switcher output) */}
-        <div className="lg:hidden max-w-sm mx-auto mb-6">
+        {/* Mobile Single Card Carousel */}
+        <div className="lg:hidden max-w-sm mx-auto">
           <AnimatePresence mode="wait">
             {(() => {
-              const p = plans[selectedMobilePlan];
+              const p = plans[activeTab];
               return (
                 <motion.div
                   key={p.name}
-                  initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.2 }}
                   className={`rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 relative shadow-xl ${
                     p.isPopular
-                      ? "bg-slate-900 dark:bg-[#14213D] text-white border-2 border-blue-500 shadow-2xl shadow-blue-600/25"
-                      : "bg-white dark:bg-[#14213D] text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 shadow-md dark:shadow-xl"
+                      ? "bg-slate-900 dark:bg-[#111C35] text-white border-2 border-blue-500 shadow-blue-600/20"
+                      : "bg-[#F1F4F9] dark:bg-[#111C35] text-slate-900 dark:text-slate-100 border border-slate-200/60 dark:border-slate-800/80"
                   }`}
                 >
                   {p.isPopular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-md">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-md">
                       Most Popular
                     </div>
                   )}
 
                   <div>
                     <div className="mb-4">
-                      <span className={`text-[11px] font-semibold uppercase tracking-wider ${p.isPopular ? "text-blue-400" : "text-blue-600 dark:text-blue-400"}`}>
+                      <div className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold shadow-xs mb-3 w-fit ${
+                        p.isPopular 
+                          ? "bg-white/10 border border-white/20 text-blue-300" 
+                          : "bg-white dark:bg-[#182647] border border-slate-200/80 dark:border-slate-700/60 text-slate-800 dark:text-slate-200"
+                      }`}>
                         {p.badge}
-                      </span>
+                      </div>
                       <h3 className={`text-xl font-bold mt-1 ${p.isPopular ? "text-white" : "text-slate-900 dark:text-white"}`}>
                         {p.name} Plan
                       </h3>
@@ -210,7 +187,7 @@ export function Pricing({ onSelectPlan }: PricingProps) {
           </AnimatePresence>
         </div>
 
-        {/* Desktop 3-Card Grid (Preserved strictly for desktop, hidden on mobile) */}
+        {/* Desktop 3-Card Grid */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-5 sm:gap-8 items-stretch max-w-6xl mx-auto">
           {plans.map((p, idx) => (
             <motion.div
@@ -220,10 +197,10 @@ export function Pricing({ onSelectPlan }: PricingProps) {
               viewport={{ once: true, amount: 0.15 }}
               transition={{ type: "spring", stiffness: 220, damping: 18, delay: idx * 0.08 }}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              className={`rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col justify-between transition-all duration-300 relative shadow-xl ${
+              className={`rounded-[28px] sm:rounded-[32px] p-6 sm:p-9 flex flex-col justify-between transition-all duration-300 relative shadow-xl ${
                 p.isPopular
-                  ? "bg-slate-900 dark:bg-[#14213D] text-white border-2 border-blue-500 z-10 shadow-2xl shadow-blue-600/25 lg:scale-[1.02]"
-                  : "bg-white dark:bg-[#14213D] text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-md dark:shadow-xl"
+                  ? "bg-slate-900 dark:bg-[#111C35] text-white border-2 border-blue-500 z-10 shadow-2xl shadow-blue-600/25 lg:scale-[1.02]"
+                  : "bg-[#F1F4F9] dark:bg-[#111C35] text-slate-900 dark:text-slate-100 border border-slate-200/60 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-md dark:shadow-xl"
               }`}
             >
               {p.isPopular && (
@@ -234,9 +211,13 @@ export function Pricing({ onSelectPlan }: PricingProps) {
 
               <div>
                 <div className="mb-4 sm:mb-6">
-                  <span className={`text-[11px] sm:text-xs font-semibold uppercase tracking-wider ${p.isPopular ? "text-blue-400" : "text-blue-600 dark:text-blue-400"}`}>
+                  <div className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold shadow-xs mb-3 w-fit ${
+                    p.isPopular 
+                      ? "bg-white/10 border border-white/20 text-blue-300" 
+                      : "bg-white dark:bg-[#182647] border border-slate-200/80 dark:border-slate-700/60 text-slate-800 dark:text-slate-200"
+                  }`}>
                     {p.badge}
-                  </span>
+                  </div>
                   <h3 className={`text-xl sm:text-2xl font-bold mt-1 ${p.isPopular ? "text-white" : "text-slate-900 dark:text-white"}`}>
                     {p.name}
                   </h3>
