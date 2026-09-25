@@ -542,10 +542,7 @@ export default function GlyphPortal({
         ${q} [data-gp-front] a,${q} [data-gp-front] button{pointer-events:var(--gp-caption-hit,auto);}
         ${q} [data-gp-front]:focus-within{opacity:1;}
         ${q} [data-gp-hint]{max-width:30ch;color:#94A3B8;}
-        ${q} [data-gp-enter]{display:inline-flex;align-items:center;gap:12px;min-height:44px;color:inherit;font:inherit;text-decoration:none;letter-spacing:inherit;}
-        ${q} [data-gp-enter]:focus-visible{outline:2px solid currentColor;outline-offset:5px;}
         ${q} [data-gp-caption]:focus-within{opacity:1;pointer-events:auto;}
-        ${q} [data-gp-enter]:focus-visible{background:#14213D;color:#F1F5F9;padding:0 12px;margin:0 -12px;}
         ${q} [data-gp-content]{box-sizing:border-box;position:relative;min-height:var(--gp-height,100dvh);padding:clamp(32px,7%,100px);display:grid;align-content:center;color:var(--gp-foreground);background:var(--gp-field);overflow-wrap:anywhere;}
         ${q}[data-gp-motion=on] [data-gp-pin]{position:sticky;top:0;}
         ${q}[data-gp-motion=off] [data-gp-hint]{display:none;}
@@ -603,7 +600,21 @@ export default function GlyphPortal({
         <span data-gp-fallback aria-hidden="true" style={{ fontFamily, fontWeight: weight }}>{text}</span>
         <div data-gp-caption>
           <span data-gp-hint aria-hidden="true">{interactive ? "Scroll down to step inside." : annotations ? "AI Receptionist · SADA AI" : ""}</span>
-          <a data-gp-enter href={`#${uid}-content`}>{enterLabel}<span aria-hidden="true"> ↘</span></a>
+          <a
+            data-gp-enter
+            href={`#${uid}-content`}
+            className="pearl-btn group"
+            aria-label={typeof enterLabel === "string" ? enterLabel : "Enter SADA AI"}
+          >
+            <div className="pearl-wrap">
+              <p>
+                <span className="pearl-star-idle" aria-hidden="true">✧</span>
+                <span className="pearl-star-hover" aria-hidden="true">✦</span>
+                <span className="pearl-text">{enterLabel}</span>
+                <span className="pearl-arrow" aria-hidden="true">↘</span>
+              </p>
+            </div>
+          </a>
         </div>
       </div>
       <div data-gp-content id={`${uid}-content`}>

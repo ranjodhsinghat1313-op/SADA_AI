@@ -106,9 +106,6 @@ export default function Demo({
       <style>{`
         [data-slipstream-demo] [data-gp-caption]{inset:calc(var(--gp-word-bottom,50%) + 82px) 24px auto;justify-content:center;}
         [data-slipstream-demo] [data-gp-hint]{display:none;}
-        [data-slipstream-demo] [data-gp-enter]{min-height:46px;padding:0 22px;gap:20px;background:#2563EB;border:1px solid #1D4ED8;border-radius:12px;color:#fff;font-size:13px;font-weight:600;box-shadow:0 4px 14px rgba(37,99,235,0.35);transition:background .2s,box-shadow .2s,transform .2s;}
-        [data-slipstream-demo] [data-gp-enter]:hover{background:#1D4ED8;box-shadow:0 6px 20px rgba(37,99,235,0.5);transform:translateY(-1px);}
-        [data-slipstream-demo] [data-gp-enter]:focus-visible{outline:2px solid #60A5FA;outline-offset:4px;}
         [data-slipstream-demo] [data-gp-touch-picker]{display:none!important;}
         [data-sublime-header]{position:absolute;inset:clamp(20px,4vw,40px) clamp(20px,4.5vw,60px) auto;display:flex;align-items:center;justify-content:space-between;gap:20px;z-index:20;}
         [data-sublime-logo]{font-size:20px;font-weight:700;letter-spacing:-.04em;color:${isDark ? "#F1F5F9" : "#0A1128"};display:flex;align-items:center;gap:6px;}
@@ -123,7 +120,6 @@ export default function Demo({
           [data-sublime-eyebrow]{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;position:absolute;top:calc(var(--gp-word-top,38%) - 34px);left:0;right:0;width:100%;margin:0 auto;text-align:center;}
           [data-sublime-support]{font-size:15.5px;font-weight:500;line-height:1.48;position:absolute;top:calc(var(--gp-word-bottom,46%) + 20px);left:0;right:0;width:92%;max-width:340px;margin:0 auto;text-align:center;text-wrap:balance;}
           [data-slipstream-demo] [data-gp-caption]{position:absolute;top:calc(var(--gp-word-bottom,46%) + 88px);left:0;right:0;width:100%;margin:0 auto;display:flex;justify-content:center;align-items:center;}
-          [data-slipstream-demo] [data-gp-enter]{min-height:46px;padding:0 24px;font-size:14px;font-weight:600;gap:10px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,99,235,0.4);}
           [data-sublime-pills]{position:absolute;top:calc(var(--gp-word-bottom,46%) + 152px);left:0;right:0;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:6px;}
           [data-sublime-pills] span{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:9999px;color:${isDark ? "#94A3B8" : "#64748B"};background:${isDark ? "rgba(20, 33, 61, 0.75)" : "rgba(241, 245, 249, 0.95)"};border:1px solid ${isDark ? "rgba(30, 41, 59, 0.8)" : "rgba(203, 213, 225, 0.8)"};}
           [data-sublime-scroll]{position:absolute;bottom:24px;left:0;right:0;width:100%;margin:0 auto;text-align:center;font-size:12px;font-weight:600;letter-spacing:.03em;}

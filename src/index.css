@@ -116,3 +116,254 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #2563eb;
 }
+
+/* ==========================================================================
+   Pearl Button (Adapted from Uiverse.io by marcelodolza for SADA AI)
+   ========================================================================== */
+@keyframes pearlTwinkle {
+  0% { transform: scale(0.7) rotate(0deg); opacity: 0.5; }
+  50% { transform: scale(1.25) rotate(45deg); opacity: 1; }
+  100% { transform: scale(1) rotate(90deg); opacity: 1; }
+}
+
+.pearl-btn,
+[data-gp-enter] {
+  --pearl-bg: #0A1128;
+  --pearl-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  position: relative;
+  border-radius: var(--pearl-radius);
+  background-color: var(--pearl-bg);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 2.5px 6px 0 rgba(147, 197, 253, 0.28),
+    inset 0 -1.5px 3px 0 rgba(0, 0, 0, 0.8),
+    inset 0 -6px 14px 0 rgba(37, 99, 235, 0.25),
+    0 10px 24px -4px rgba(10, 17, 40, 0.35),
+    0 4px 10px -2px rgba(10, 17, 40, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 0;
+  line-height: 1;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pearl-btn .wrap,
+.pearl-btn .pearl-wrap,
+[data-gp-enter] .wrap,
+[data-gp-enter] .pearl-wrap {
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.95);
+  padding: 12px 26px;
+  border-radius: inherit;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Star sparkle icon swap on hover */
+.pearl-btn .wrap p span:nth-child(2),
+.pearl-btn .pearl-wrap p .pearl-star-hover,
+[data-gp-enter] .wrap p span:nth-child(2),
+[data-gp-enter] .pearl-wrap p .pearl-star-hover {
+  display: none;
+  color: #93C5FD;
+  filter: drop-shadow(0 0 5px #60A5FA);
+}
+
+.pearl-btn .wrap p span:nth-child(1),
+.pearl-btn .pearl-wrap p .pearl-star-idle,
+[data-gp-enter] .wrap p span:nth-child(1),
+[data-gp-enter] .pearl-wrap p .pearl-star-idle {
+  display: inline-block;
+  color: #BFDBFE;
+  transition: transform 0.2s ease;
+}
+
+.pearl-btn:hover .wrap p span:nth-child(1),
+.pearl-btn:hover .pearl-wrap p .pearl-star-idle,
+[data-gp-enter]:hover .wrap p span:nth-child(1),
+[data-gp-enter]:hover .pearl-wrap p .pearl-star-idle {
+  display: none;
+}
+
+.pearl-btn:hover .wrap p span:nth-child(2),
+.pearl-btn:hover .pearl-wrap p .pearl-star-hover,
+[data-gp-enter]:hover .wrap p span:nth-child(2),
+[data-gp-enter]:hover .pearl-wrap p .pearl-star-hover {
+  display: inline-block;
+  animation: pearlTwinkle 0.4s ease-in-out;
+}
+
+.pearl-btn .wrap p,
+.pearl-btn .pearl-wrap p,
+[data-gp-enter] .wrap p,
+[data-gp-enter] .pearl-wrap p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  transition: all 0.2s ease;
+  transform: translateY(1%);
+}
+
+.pearl-btn .pearl-arrow,
+[data-gp-enter] .pearl-arrow {
+  display: inline-block;
+  font-size: 13px;
+  opacity: 0.8;
+  margin-left: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.pearl-btn:hover .pearl-arrow,
+[data-gp-enter]:hover .pearl-arrow {
+  opacity: 1;
+  transform: translate(2px, 2px);
+}
+
+/* Luminous specular reflections */
+.pearl-btn .wrap::before,
+.pearl-btn .wrap::after,
+.pearl-btn .pearl-wrap::before,
+.pearl-btn .pearl-wrap::after,
+[data-gp-enter] .wrap::before,
+[data-gp-enter] .wrap::after,
+[data-gp-enter] .pearl-wrap::before,
+[data-gp-enter] .pearl-wrap::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Ambient dome bubble */
+.pearl-btn .wrap::before,
+.pearl-btn .pearl-wrap::before,
+[data-gp-enter] .wrap::before,
+[data-gp-enter] .pearl-wrap::before {
+  left: -15%;
+  right: -15%;
+  bottom: 25%;
+  top: -100%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.22) 0%, rgba(147, 197, 253, 0.12) 50%, rgba(255, 255, 255, 0) 80%);
+}
+
+/* Top curved glassy crescent highlight */
+.pearl-btn .wrap::after,
+.pearl-btn .pearl-wrap::after,
+[data-gp-enter] .wrap::after,
+[data-gp-enter] .pearl-wrap::after {
+  left: 8%;
+  right: 8%;
+  top: 8%;
+  bottom: 46%;
+  border-radius: 20px 20px 0 0;
+  box-shadow: inset 0 6px 5px -5px rgba(255, 255, 255, 0.85);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Hover state */
+.pearl-btn:hover,
+[data-gp-enter]:hover {
+  transform: translateY(-1.5px);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 3px 8px 0 rgba(147, 197, 253, 0.38),
+    inset 0 -1.5px 3px 0 rgba(0, 0, 0, 0.8),
+    inset 0 -6px 14px 0 rgba(59, 130, 246, 0.35),
+    0 14px 28px -4px rgba(37, 99, 235, 0.35),
+    0 4px 12px -2px rgba(10, 17, 40, 0.25);
+}
+
+.pearl-btn:hover .wrap::before,
+.pearl-btn:hover .pearl-wrap::before,
+[data-gp-enter]:hover .wrap::before,
+[data-gp-enter]:hover .pearl-wrap::before {
+  transform: translateY(-6%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.3) 0%, rgba(147, 197, 253, 0.2) 50%, rgba(255, 255, 255, 0) 80%);
+}
+
+.pearl-btn:hover .wrap::after,
+.pearl-btn:hover .pearl-wrap::after,
+[data-gp-enter]:hover .wrap::after,
+[data-gp-enter]:hover .pearl-wrap::after {
+  opacity: 0.6;
+  transform: translateY(2px);
+}
+
+.pearl-btn:hover .wrap p,
+.pearl-btn:hover .pearl-wrap p,
+[data-gp-enter]:hover .wrap p,
+[data-gp-enter]:hover .pearl-wrap p {
+  transform: translateY(-2%);
+}
+
+/* Active click state */
+.pearl-btn:active,
+[data-gp-enter]:active {
+  transform: translateY(1.5px);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 2px 4px 0 rgba(0, 0, 0, 0.6),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.9),
+    inset 0 -4px 8px 0 rgba(37, 99, 235, 0.2),
+    0 4px 12px -2px rgba(10, 17, 40, 0.3);
+}
+
+.pearl-btn:focus-visible,
+[data-gp-enter]:focus-visible {
+  outline: 2px solid #60A5FA;
+  outline-offset: 4px;
+}
+
+/* Dark mode palette adjustments */
+.dark .pearl-btn,
+.dark [data-gp-enter] {
+  --pearl-bg: #070D1F;
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 2.5px 6px 0 rgba(96, 165, 250, 0.3),
+    inset 0 -1.5px 3px 0 rgba(0, 0, 0, 0.9),
+    inset 0 -6px 14px 0 rgba(37, 99, 235, 0.3),
+    0 10px 24px -4px rgba(0, 0, 0, 0.7),
+    0 0 20px -2px rgba(37, 99, 235, 0.3);
+}
+
+.dark .pearl-btn:hover,
+.dark [data-gp-enter]:hover {
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 3px 8px 0 rgba(147, 197, 253, 0.45),
+    inset 0 -1.5px 3px 0 rgba(0, 0, 0, 0.9),
+    inset 0 -6px 14px 0 rgba(59, 130, 246, 0.45),
+    0 14px 30px -4px rgba(0, 0, 0, 0.8),
+    0 0 25px 0 rgba(37, 99, 235, 0.45);
+}
+
+@media (max-width: 768px) {
+  .pearl-btn .wrap,
+  .pearl-btn .pearl-wrap,
+  [data-gp-enter] .wrap,
+  [data-gp-enter] .pearl-wrap {
+    font-size: 13.5px;
+    padding: 10px 22px;
+  }
+}
+
