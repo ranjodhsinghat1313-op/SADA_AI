@@ -105,12 +105,12 @@ export default function Demo({
         [data-sublime-scroll]{position:absolute;inset:auto 24px 14px;text-align:center;color:${isDark ? "#94A3B8" : "#64748B"};font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:0.8;}
         @media(max-width:768px){
           [data-sublime-header]{display:none!important;}
-          [data-sublime-eyebrow]{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;position:absolute;top:calc(var(--gp-word-top,38%) - 26px);left:0;right:0;width:100%;margin:0 auto;text-align:center;}
-          [data-sublime-support]{font-size:14px;font-weight:500;line-height:1.48;position:absolute;top:calc(var(--gp-word-bottom,46%) + 14px);left:0;right:0;width:92%;max-width:340px;margin:0 auto;text-align:center;text-wrap:balance;}
-          [data-slipstream-demo] [data-gp-caption]{position:absolute;inset:auto 16px 74px;left:0;right:0;width:100%;margin:0 auto;display:flex;justify-content:center;align-items:center;}
-          [data-sublime-pills]{position:absolute;inset:auto 12px 34px;left:0;right:0;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:6px;}
-          [data-sublime-pills] span{font-size:10.5px;font-weight:600;padding:3.5px 9px;border-radius:9999px;}
-          [data-sublime-scroll]{position:absolute;inset:auto 0 10px;text-align:center;font-size:10.5px;font-weight:600;letter-spacing:.05em;}
+          [data-sublime-eyebrow]{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;position:absolute;top:calc(var(--gp-word-top,34%) - 26px);left:0;right:0;width:100%;margin:0 auto;text-align:center;}
+          [data-sublime-support]{font-size:13.5px;font-weight:500;line-height:1.45;position:absolute;top:calc(var(--gp-word-bottom,43%) + 12px);left:0;right:0;width:92%;max-width:320px;margin:0 auto;text-align:center;text-wrap:balance;}
+          [data-slipstream-demo] [data-gp-caption]{position:absolute;inset:auto;top:calc(var(--gp-word-bottom,43%) + 66px);left:0;right:0;width:100%;margin:0 auto;display:flex;justify-content:center;align-items:center;}
+          [data-sublime-pills]{position:absolute;inset:auto;top:calc(var(--gp-word-bottom,43%) + 122px);left:0;right:0;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:nowrap;padding:0 8px;}
+          [data-sublime-pills] span{font-size:9.5px;font-weight:600;padding:3px 7.5px;border-radius:9999px;white-space:nowrap;}
+          [data-sublime-scroll]{position:absolute;inset:auto;top:calc(var(--gp-word-bottom,43%) + 162px);left:0;right:0;text-align:center;font-size:10px;font-weight:600;letter-spacing:.05em;}
           [data-slipstream-demo] [data-gp-content]{padding:2.25rem 1.25rem 2.75rem!important;align-content:start!important;justify-content:start!important;min-height:auto!important;}
           [data-slipstream-copy]{gap:1.5rem;margin:0;}
           [data-slipstream-copy] h2{font-size:1.45rem;line-height:1.25;}
