@@ -259,7 +259,7 @@ export default function GlyphPortal({
       const cx = center.x + ((target?.x ?? center.x) - center.x) * blend;
       const cy = center.y + ((target?.y ?? center.y) - center.y) * blend;
       const roll = -4 * smooth(0.06, 0.5, t) * (1 - smooth(0.62, 0.92, t));
-      const initialCenterY = isMobile ? H * 0.36 : H * 0.48;
+      const initialCenterY = isMobile ? H * 0.38 : H * 0.48;
       const centerY = initialCenterY + (H * 0.50 - initialCenterY) * eased;
       const transform = `translate(${W / 2} ${centerY}) scale(${scale}) rotate(${roll}) translate(${-cx} ${-cy})`;
       const radians = roll * Math.PI / 180;
@@ -309,7 +309,7 @@ export default function GlyphPortal({
       const maxWordHeight = hasFront && H < 480 ? Math.min(H * 0.28, Math.max(24, H - 240)) : (isMobile ? H * 0.18 : H * 0.27);
       startScale = Math.min((W * widthFactor) / bounds.width, maxWordHeight / bounds.height);
       select(target);
-      const wordCenterY = isMobile ? H * 0.36 : H * 0.48;
+      const wordCenterY = isMobile ? H * 0.38 : H * 0.48;
       for (const button of buttons) {
         const letter = letters.find((item) => item.index === Number(button.dataset.gpLetter))!;
         if (letter) {
