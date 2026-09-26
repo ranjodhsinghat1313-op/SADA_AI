@@ -295,7 +295,7 @@ export default function GlyphPortal({
         smallViewport
       );
       const viewportHeight = isMobile
-        ? measuredH
+        ? (window.visualViewport?.height || window.innerHeight)
         : Math.max(1, Math.min(root?.clientHeight ?? smallViewport, smallViewport));
       H = motion.matches ? Math.min(viewportHeight * 0.75, 480) : viewportHeight;
       section.style.setProperty("--gp-height", `${H}px`);
@@ -527,7 +527,7 @@ export default function GlyphPortal({
           position:relative;isolation:isolate;background:var(--gp-paper);color:var(--gp-ink);font-family:system-ui,sans-serif;
         }
         ${q}>[data-gp-viewport]{position:absolute;inset:0 auto auto 0;height:100vh;height:100dvh;width:0;pointer-events:none;visibility:hidden;}
-        ${q} [data-gp-pin]{position:relative;height:var(--gp-height,100dvh);min-height:100dvh;min-height:100vh;overflow:clip;isolation:isolate;container-type:size;}
+        ${q} [data-gp-pin]{position:relative;height:var(--gp-height,100dvh);min-height:var(--gp-height,100dvh);overflow:clip;isolation:isolate;container-type:size;}
         ${q} [data-gp-field]{position:absolute;inset:0;bottom:-40px;min-height:calc(100% + 40px);background:var(--gp-field);opacity:0;pointer-events:none;}
         ${q}[data-gp-ready] [data-gp-field]{opacity:1;}
         ${q} [data-gp-art]{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}

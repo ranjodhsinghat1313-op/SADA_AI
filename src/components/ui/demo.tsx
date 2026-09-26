@@ -107,10 +107,10 @@ export default function Demo({
           [data-sublime-header]{display:none!important;}
           [data-sublime-eyebrow]{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;position:absolute;top:calc(var(--gp-word-top,35%) - 26px);left:0;right:0;width:100%;margin:0 auto;text-align:center;}
           [data-sublime-support]{font-size:13.5px;font-weight:500;line-height:1.45;position:absolute;top:calc(var(--gp-word-bottom,44%) + 12px);left:0;right:0;width:92%;max-width:320px;margin:0 auto;text-align:center;text-wrap:balance;}
-          [data-slipstream-demo] [data-gp-caption]{position:absolute;inset:auto 16px 82px;left:0;right:0;width:100%;margin:0 auto;display:flex;justify-content:center;align-items:center;z-index:20;}
-          [data-sublime-pills]{position:absolute;inset:auto 10px 44px;left:0;right:0;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:nowrap;padding:0 8px;z-index:20;}
+          [data-slipstream-demo] [data-gp-caption]{position:absolute;inset:auto 16px calc(env(safe-area-inset-bottom, 0px) + 96px);left:0;right:0;width:100%;margin:0 auto;display:flex;justify-content:center;align-items:center;z-index:20;}
+          [data-sublime-pills]{position:absolute;inset:auto 8px calc(env(safe-area-inset-bottom, 0px) + 52px);left:0;right:0;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:nowrap;padding:0 8px;z-index:20;}
           [data-sublime-pills] span{font-size:9.5px;font-weight:600;padding:3.5px 8px;border-radius:9999px;white-space:nowrap;}
-          [data-sublime-scroll]{position:absolute;inset:auto 0 16px;text-align:center;font-size:10.5px;font-weight:600;letter-spacing:.05em;z-index:20;}
+          [data-sublime-scroll]{position:absolute;inset:auto 0 calc(env(safe-area-inset-bottom, 0px) + 20px);text-align:center;font-size:10.5px;font-weight:600;letter-spacing:.05em;z-index:20;}
           [data-slipstream-demo] [data-gp-content]{padding:2.25rem 1.25rem 2.75rem!important;align-content:start!important;justify-content:start!important;min-height:auto!important;}
           [data-slipstream-copy]{gap:1.5rem;margin:0;}
           [data-slipstream-copy] h2{font-size:1.45rem;line-height:1.25;}
