@@ -12,6 +12,7 @@ import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { DemoBookingModal } from "@/components/sections/DemoBookingModal";
+import { LoadingScreen } from "@/components/ui/LoadingScreen";
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -148,6 +149,9 @@ export default function App() {
         isDark ? "bg-[#0A1128] text-[#F1F5F9]" : "bg-[#F8FAFC] text-slate-900"
       } flex flex-col font-sans selection:bg-blue-500/25 selection:text-white transition-colors duration-300`}
     >
+      {/* Page Load / Reload Animated Screen */}
+      <LoadingScreen isDark={isDark} />
+
       {/* Top Animated Navigation Bar (Slides up on zoom, slides down when content arrives) */}
       <NavigationMenu4
         onBookDemo={handleBookDemo}

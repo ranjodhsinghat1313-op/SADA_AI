@@ -7,6 +7,7 @@
  * A scroll-driven camera through live type. Keep this notice with copies.
  */
 import { useId, useLayoutEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import { ShaderButtons } from "@/components/ui/shader-buttons";
 
 export type GlyphPortalStyle = CSSProperties & {
   "--gp-paper"?: string;
@@ -38,6 +39,7 @@ export type GlyphPortalProps = {
   style?: GlyphPortalStyle;
   /** Called once per rendered scroll frame, never through React state. */
   onProgress?: (progress: number) => void;
+  mode?: "dark" | "light";
 };
 
 const clamp = (n: number, a = 0, b = 1) => Math.min(b, Math.max(a, n));
@@ -110,7 +112,7 @@ function scrollParent(element: HTMLElement): HTMLElement | null {
 export default function GlyphPortal({
   word = "SADA AI", focusChar, interactive = true, background, front, children, scrollLength = 2.4,
   fontFamily = DEFAULT_FONT, fontWeight = 900, annotations = false,
-  enterLabel = "Explore More", className, style, onProgress,
+  enterLabel = "Explore More", className, style, onProgress, mode,
 }: GlyphPortalProps) {
   const uid = `gp-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const clipId = `${uid}-clip`;
@@ -257,8 +259,8 @@ export default function GlyphPortal({
       const cx = center.x + ((target?.x ?? center.x) - center.x) * blend;
       const cy = center.y + ((target?.y ?? center.y) - center.y) * blend;
       const roll = -4 * smooth(0.06, 0.5, t) * (1 - smooth(0.62, 0.92, t));
-      const initialCenterY = isMobile ? H * 0.40 : H * 0.46;
-      const centerY = isMobile ? (initialCenterY + (H * 0.50 - initialCenterY) * eased) : (H * 0.46 + H * 0.04 * eased);
+      const initialCenterY = isMobile ? H * 0.45 : H * 0.48;
+      const centerY = isMobile ? (initialCenterY + (H * 0.50 - initialCenterY) * eased) : (initialCenterY + (H * 0.50 - initialCenterY) * eased);
       const transform = `translate(${W / 2} ${centerY}) scale(${scale}) rotate(${roll}) translate(${-cx} ${-cy})`;
       const radians = roll * Math.PI / 180;
       const dx = W / 2 / scale, dy = centerY / scale;
@@ -303,11 +305,11 @@ export default function GlyphPortal({
       art.setAttribute("viewBox", `0 0 ${W} ${H}`);
       if (fontDirty) { ready = readInk(); fontDirty = false; }
       if (!ready) return;
-      const wordHeight = hasFront && H < 480 ? Math.min(H * .34, Math.max(24, H - 264)) : (isMobile ? H * 0.32 : H * 0.35);
-      const widthFactor = isMobile ? 0.86 : 0.78;
-      startScale = Math.min(W * widthFactor / bounds.width, wordHeight / bounds.height);
+      const widthFactor = isMobile ? 0.96 : 0.975;
+      const maxWordHeight = hasFront && H < 480 ? Math.min(H * 0.28, Math.max(24, H - 240)) : (isMobile ? H * 0.24 : H * 0.27);
+      startScale = Math.min((W * widthFactor) / bounds.width, maxWordHeight / bounds.height);
       select(target);
-      const wordCenterY = isMobile ? H * 0.40 : H * 0.46;
+      const wordCenterY = isMobile ? H * 0.45 : H * 0.48;
       for (const button of buttons) {
         const letter = letters.find((item) => item.index === Number(button.dataset.gpLetter))!;
         if (letter) {
@@ -590,7 +592,17 @@ export default function GlyphPortal({
         <svg data-gp-art aria-hidden="true" focusable="false">
           <defs>
             <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
-              <text data-gp-glyph x="0" y="0" style={{ fontFamily, fontWeight: weight, fontSize: 100, fontKerning: "none", fontVariantLigatures: "none", letterSpacing: 0 }}>{text}</text>
+              <text
+                data-gp-glyph
+                x="0"
+                y="0"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                paintOrder="stroke fill"
+                style={{ fontFamily, fontWeight: 950, fontSize: 100, fontKerning: "none", fontVariantLigatures: "none", letterSpacing: "0.01em" }}
+              >
+                {text}
+              </text>
             </clipPath>
           </defs>
           <g data-gp-marks style={{ visibility: annotations ? "visible" : "hidden" }}><path /></g>
@@ -603,24 +615,16 @@ export default function GlyphPortal({
           {characters.map(({ char, index }, i) => <option key={index} value={index}>{i + 1} · {char}</option>)}
         </select></label>
         {front && <div data-gp-front>{front}</div>}
-        <span data-gp-fallback aria-hidden="true" style={{ fontFamily, fontWeight: weight }}>{text}</span>
+        <span data-gp-fallback aria-hidden="true" style={{ fontFamily, fontWeight: 950, WebkitTextStroke: "1px currentColor" }}>{text}</span>
         <div data-gp-caption>
           <span data-gp-hint aria-hidden="true">{interactive ? "Scroll down to step inside." : annotations ? "AI Receptionist · SADA AI" : ""}</span>
-          <a
-            data-gp-enter
+          <ShaderButtons
+            variant="soft-surface"
+            mode={(mode === "dark" || style?.["--gp-paper"] === "#0A1128") ? "light" : "dark"}
+            label={typeof enterLabel === "string" ? enterLabel : "Explore More"}
             href={`#${uid}-content`}
-            className="pearl-btn group"
-            aria-label={typeof enterLabel === "string" ? enterLabel : "Explore More"}
-          >
-            <div className="pearl-wrap">
-              <p>
-                <span className="pearl-star-idle" aria-hidden="true">✧</span>
-                <span className="pearl-star-hover" aria-hidden="true">✦</span>
-                <span className="pearl-text">{enterLabel}</span>
-                <span className="pearl-arrow" aria-hidden="true">↘</span>
-              </p>
-            </div>
-          </a>
+            data-gp-enter
+          />
         </div>
       </div>
       <div data-gp-content id={`${uid}-content`}>

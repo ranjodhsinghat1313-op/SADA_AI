@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from "react"
 import { 
-  Phone, 
-  Sparkles, 
   Sun, 
   Moon, 
   PhoneCall, 
@@ -178,14 +176,6 @@ export default function NavigationMenu4({
                   FAQ
                 </a>
 
-                <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
-                  <a
-                    href="tel:+61280007232"
-                    className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 rounded-lg border border-blue-200 dark:border-blue-900/60"
-                  >
-                    <Phone className="h-3.5 w-3.5" /> Call Demo: +61 2 8000 7232
-                  </a>
-                </div>
               </div>
             </PopoverContent>
           </Popover>
@@ -289,18 +279,8 @@ export default function NavigationMenu4({
           </div>
         </div>
 
-        {/* Right side: Phone Action + Theme Toggle + Book Demo */}
+        {/* Right side: Theme Toggle */}
         <div className="flex items-center gap-1.5 sm:gap-2.5">
-          
-          {/* Quick Demo Phone Call Link */}
-          <a
-            href="tel:+61280007232"
-            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 hover:text-blue-900 dark:hover:text-white transition-colors"
-          >
-            <Phone className="h-3 w-3 text-blue-600 dark:text-blue-400" />
-            <span>Demo Line: +61 2 8000 7232</span>
-          </a>
-
           {/* Dark / Light Mode Toggle Button */}
           <button
             onClick={onToggleTheme}
@@ -314,18 +294,6 @@ export default function NavigationMenu4({
               <Moon className="h-4 w-4 text-blue-600 transition-transform rotate-0 hover:-rotate-12 duration-300" />
             )}
           </button>
-
-          {/* Book Demo Primary CTA */}
-          <Button
-            onClick={onBookDemo}
-            variant="default"
-            size="sm"
-            className="h-9 px-2.5 sm:px-4 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/30 active:scale-[0.98] shrink-0"
-          >
-            <Sparkles className="mr-1 sm:mr-1.5 h-3.5 w-3.5 text-blue-200" />
-            <span><span className="hidden min-[380px]:inline">Book </span>Demo</span>
-          </Button>
-
         </div>
       </div>
     </header>
